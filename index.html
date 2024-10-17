@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studymate</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="todo.css">
+    <link rel="stylesheet" href="cal.css">
+    <link rel="stylesheet" href="todo.css">
+    <link rel="stylesheet" href="todo.css">
+    <link rel="stylesheet" href="cont.css">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.18.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+
+<body>
+
+    <div class="sidebar">
+
+        <h1 class="logo">STUDYMATE
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="#home" onclick="showSection('home')"><i class='bx bxs-home'></i> HOME</a></li>
+                <li><a href="#todo" onclick="showSection('todo')"><i class='bx bx-list-plus'></i> TO-DO LIST</a></li>
+                <li><a href="#calendar" onclick="showSection('calendar')"><i class='bx bxs-calendar'></i> CALENDAR</a>
+                </li>
+                <li><a href="#timer" onclick="showSection('timer')"> <i class='bx bxs-hourglass'> </i> TIMER</a></li>
+                <li><a href="#contact" onclick="showSection('contact')"> <i class='bx bxs-chat'></i> CONTACT</a></li>
+            </ul>
+        </nav>
+        <footer>
+            <p>© 2024 shriti.</p>
+        </footer>
+    </div>
+
+    <div class="main-content">
+        <div id="home" class="content-section">
+            <div class="home-content">
+                <img class="logo1" src="images\logo2.png" />
+                <h1>Level up your studies with StudyMate! </h1>
+                <p>Feeling overwhelmed by deadlines and tasks? StudyMate is here to help! This time management tool is
+                    designed specifically for students to plan their study schedules, track to-do lists, and focus
+                    on their academic goals. With features like calendar integration and a countdown timer for study
+                    sessions, StudyMate can help you take control of your time and become a more organized and
+                    successful student.
+                </p>
+            </div>
+        </div>
+        <div id="todo" class="content-section" style="display:none;">
+            <div class="container1">
+                <!-- header that has input and add button -->
+                <header>
+                    <h1>Todo List</h1>
+                    <!-- Error message -->
+                    <div class="alert-message"></div>
+                    <div class="input-section">
+                        <input type="text" placeholder="Add a todo . . ."
+                            class="input input-bordered input-secondary w-full max-w-xs" />
+                        <input type="date" class="input input-bordered input-secondary w-full max-w-xs schedule-date" />
+                        <button class="btn btn-secondary add-task-button">
+                            <i class="bx bx-plus bx-sm"></i>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="todos-filter">
+                    <div class="dropdown">
+                        <label tabindex="0" class="btn m-1">Filter</label>
+                        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                            <li onclick="filterTodos('all')"><a>All</a></li>
+                            <li onclick="filterTodos('pending')"><a>Pending</a></li>
+                            <li onclick="filterTodos('completed')"><a>Completed</a></li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-secondary delete-all-btn">
+                        Delete All
+                    </button>
+                </div>
+
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="todos-list-body">
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+        <div id="calendar" class="content-section" style="display:none;">
+            <div class="calendar">
+                <div class="header">
+                    <a data-action="prev-month" href="javascript:void(0)" title="Previous Month"><i></i></a>
+                    <div class="text" data-render="month-year"></div>
+                    <a data-action="next-month" href="javascript:void(0)" title="Next Month"><i></i></a>
+                </div>
+                <div class="months" data-flow="left">
+                    <div class="month month-a">
+                        <div class="render render-a"></div>
+                    </div>
+                    <div class="month month-b">
+                        <div class="render render-b"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="timer" class="content-section" style="display: none;">
+            <div class="container3">
+                <h1>Timer</h1>
+                <div class="timer-display"> 00:00:00</div>
+                <div class="timer-inputs">
+                    <input type="number" id="hours" placeholder="HH" min="0" max="23">
+                    <input type="number" id="minutes" placeholder="MM" min="0" max="59">
+                    <input type="number" id="seconds" placeholder="SS" min="0" max="59">
+                </div>
+                <div class="timer-controls">
+                    <button class="btn btn-primary" onclick="setTime()">Set Time</button>
+                    <button class="btn btn-secondary" onclick="startTimer()"> Start</button>
+                    <button class="btn btn-warning" onclick="pauseTimer()"> Pause</button>
+                    <button class="btn btn-danger" onclick="resetTimer()">reset </button>
+                </div>
+
+            </div>
+
+        </div>
+        <div id="contact" class="content-section" style="display: none;">
+        <div class="form-main">
+            <h2 class="form-head">Contact Form</h2>
+            <form class="form-wrapper">
+                <div class="form-card">
+                    <label class="form-label" for="full_name">Full Name</label>
+                    <input
+                        class="form-input"
+                        type="text"
+                        name="full_name"
+                        required="required"
+                    />
+                </div>
+    
+                <div class="form-card">
+                    <label class="form-label" for="email">Email</label>
+                    <input
+                        class="form-input"
+                        type="email"
+                        name="email"
+                        required="required"
+                    />
+                </div>
+    
+                <div class="form-card">
+                    <label class="form-label" for="phone_number">Phone Number</label>
+                    <input
+                        class="form-input"
+                        type="number"
+                        name="phone_number"
+                        required="required"
+                    />
+                </div>
+    
+                <div class="form-card">
+                    <label class="form-label" for="address">Address</label>
+                    <textarea
+                        class="form-textarea"
+                        maxlength="420"
+                        rows="3"
+                        name="address"
+                        required="required"
+                    ></textarea>
+                </div>
+                
+                <div class="btn-wrap">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+</div>
+    
+
+        <script src="script.js"></script>
+        <script src="todo.js"></script>
+        <script src="cal.js"></script>
+        <script src="home.js"></script>
+        <script src="timer.js"></script>
+
+
+</body>
+
+</html>
